@@ -10,7 +10,7 @@
     <!-- bean definitions here -->
     <context:component-scan base-package="com.lexie.ioc"/>
 	
-	<bean id="mySchool" class="com.lexie.ioc.School">
+	<!-- <bean id="mySchool" class="com.lexie.ioc.School">
 		<property name="name" value="清华大学"></property>
 	</bean>
 	<bean id="mySchool2" class="com.lexie.ioc.School">
@@ -42,7 +42,7 @@
 				<prop key="gender">男</prop>
 			</props>
 		</property>
-	</bean>
+	</bean> -->
 	
 	
 	<!-- spel表达式可以访问方法，可以使用bean的属性，方法 -->
