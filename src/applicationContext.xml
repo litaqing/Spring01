@@ -7,5 +7,10 @@
 
     <!-- bean definitions here -->
     
-	<bean id="myService" class="com.lexie.service.SomeServiceImpl"/>
+	
+	<bean id="myService" class="com.lexie.service.ServiceFactory" 
+	init-method="setUp" destroy-method="tearDown"
+	factory-method="getSomeService"/>
+	
+	<bean class="com.lexie.service.MyBeanPostProcessor"/>
 </beans>
