@@ -16,6 +16,7 @@ public class MyTest {
 
 	@Test
 	public void test01() {
+		System.out.println("---");
 		System.out.println(person);
 		System.out.println(student);
 	}
