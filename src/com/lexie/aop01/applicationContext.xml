@@ -1,16 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
         http://www.springframework.org/schema/beans 
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!-- bean definitions here -->
-    
+	<bean id="someService" class="com.lexie.aop01.SomServiceImpl" />
+
+	<bean id="myBeforeAdvice" class="com.lexie.aop01.MyMethodBeforeAdvice" />
+
+	<bean id="myAfterAdvice" class="com.lexie.aop01.MyAfterReturningAdvice" />
 	
-	<bean id="myService" class="com.lexie.service.ServiceFactory" 
-	init-method="setUp" destroy-method="tearDown"
-	factory-method="getSomeService"/>
+	<bean id="myMethodAdvice" class="com.lexie.aop01.MyMethodInterceptor" />
 	
-	<bean class="com.lexie.service.MyBeanPostProcessor"/>
+	<bean id="myThrowsAdvice" class="com.lexie.aop01.MyThrowsAdvice" />
+	<bean id="serviceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="someService"></property>
+
+	<!-- 	<property name="targetName" value="someService"></property> -->
+
+	<!-- 	<property name="interceptorNames" value="myAfterAdvice"></property> -->
+
+		<!-- <property name="interceptorNames" value="myMethodAdvice"></property> -->
+		
+		<!-- <property name="interceptorNames" value="myBeforeAdvice"></property> -->
+		
+		<property name="interceptorNames" value="myThrowsAdvice"></property>
+		
+	</bean>
 </beans>
