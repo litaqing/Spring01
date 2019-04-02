@@ -14,4 +14,10 @@ public class SomServiceImpl implements ISomeService {
 		return "abcd";
 	}
 
+	@Override
+	public void doTird() {
+		// TODO Auto-generated method stub
+		System.out.println("Ö´ÐÐdoThird·½·¨");
+	}
+
 }

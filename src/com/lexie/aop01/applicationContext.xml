@@ -14,18 +14,49 @@
 	<bean id="myMethodAdvice" class="com.lexie.aop01.MyMethodInterceptor" />
 	
 	<bean id="myThrowsAdvice" class="com.lexie.aop01.MyThrowsAdvice" />
-	<bean id="serviceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+	
+	<!-- 顾问 名字匹配 -->
+	<bean id="myAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+		<property name="advice" ref="myAfterAdvice"></property>
+		<property name="mappedName" value="*ir*"></property>
+	</bean>
+	<!-- 顾问 正则表达式匹配  注意：这里的正则表达式匹配的对象时全限定性方法名 -->
+	<!-- <bean id="myAdvisor1" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<property name="advice" ref="myAfterAdvice"></property>
+		<property name="pattern" value=".*doFirst|.*doSecond"></property>
+	</bean>
+	-->
+	<!-- 注册自动代理生成器 
+		有三个问题
+		1.不能选择目标对象
+		2.不能选择切面类型，切面只能时advisor
+		3.不能选择advisor，所以advisor均被作为切面织入到方法
+	 <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+	 -->
+	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames" value="someService"></property>
+		<property name="interceptorNames" value="myAdvisor"></property>
+	</bean>
+	
+	<!-- <bean id="serviceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
 		<property name="target" ref="someService"></property>
 
-	<!-- 	<property name="targetName" value="someService"></property> -->
+		<property name="targetName" value="someService"></property>
 
-	<!-- 	<property name="interceptorNames" value="myAfterAdvice"></property> -->
+		<property name="interceptorNames" value="myAfterAdvice"></property>
 
-		<!-- <property name="interceptorNames" value="myMethodAdvice"></property> -->
+		<property name="interceptorNames" value="myMethodAdvice"></property>
 		
-		<!-- <property name="interceptorNames" value="myBeforeAdvice"></property> -->
+		<property name="interceptorNames" value="myBeforeAdvice"></property>
 		
-		<property name="interceptorNames" value="myThrowsAdvice"></property>
-		
-	</bean>
+		<property name="interceptorNames" value="myAdvisor1">
+			<array>
+				<value>myBeforeAdvice</value> 	,myAfterAdvice,myMethodAdvice,myThrowsAdvice
+				<value>myAfterAdvice</value>
+				<value>myMethodAdvice</value>
+				<value>myThrowsAdvice</value>
+			</array>
+		</property>
+		<property name="proxyTargetClass" value="true"/> cglib代理！
+	</bean> -->
 </beans>

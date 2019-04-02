@@ -9,11 +9,13 @@ public class Mytest {
 	public void test01() {
 		String resource = "com/lexie/aop01/applicationContext.xml";
 		ApplicationContext ac = new ClassPathXmlApplicationContext(resource);
-		ISomeService service = (ISomeService) ac.getBean("serviceProxy");
+		ISomeService service = (ISomeService) ac.getBean("someService");
 		service.doFirst();
 		System.out.println("------------");
 		String second = service.doSecond();
 		System.out.println(second);
+		System.out.println("------------");
+		service.doTird();
 
 	}
 }
