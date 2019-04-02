@@ -16,6 +16,5 @@ public class Mytest {
 		System.out.println(second);
 		System.out.println("------------");
 		service.doTird();
-
 	}
 }
